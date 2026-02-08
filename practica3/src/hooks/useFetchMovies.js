@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";  
 
-export const API_KEY = "COLOCA TU API KEY ACA";
+export const API_KEY = "9aefd3a7";
 
 /** 
 @param {String} query 
