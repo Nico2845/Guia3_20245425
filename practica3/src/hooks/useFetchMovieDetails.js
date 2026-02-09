@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { API_KEY } from "./useFetchMovies";
 
 /**
@@ -24,7 +24,7 @@ export function useFetchMovieDetails(selectedId){
                 setError(null);
 
                 const response = await
-            fetch(`http://www.omdbapi.com/?apikey=${API_KEY}&i=${selectedId}`);
+            fetch(`https://www.omdbapi.com/?apikey=${API_KEY}&i=${selectedId}`);
 
             if (!response.ok)
                 throw new Error ("Error al cargar los detalles de la pelicula");

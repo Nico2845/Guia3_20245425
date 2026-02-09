@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";  
 
-export const API_KEY = "9aefd3a7";
+export const API_KEY = "95e1fd5b";
 
 /** 
 @param {String} query 
@@ -24,7 +24,7 @@ export function useFetchMovies(query){
                 setError(null);
 
                 const response = await 
-                fetch(`http://www.omdbapi.com/?apikey=${API_KEY}&s=${query}`);
+                fetch(`https://www.omdbapi.com/?apikey=${API_KEY}&s=${query}`);
 
                 if(!response.ok)
                     throw new Error ("Error al cargar peliculas");

@@ -58,7 +58,7 @@ export default function App() {
                     {selectedId ? (
                     <MovieDetails
                         selectedId={selectedId}
-                        onCloseMovie={handleCloseMovie}
+                        onCloseMovie={() => setSelectedId(null)}
                         onAddWatched={handleAddWatched}
                         watched={watched}
                     />
