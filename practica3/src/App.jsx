@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect} from "react";
 import { Logo, Nav, NumResults, Search } from "./components/Nav";
 import { Box } from "./components/Box";
 import { MovieList } from "./components/Movie";
@@ -13,7 +13,26 @@ export default function App() {
     // Obtiene películas basadas en la consulta
     const { movies, isLoading, error } = useFetchMovies(query);
     // Estado de películas vistas
-    const [watched, setWatched] = useState([]);
+    const [watched, setWatched] = useState(()=> {
+        const storedValue = localStorage.getItem("watched");
+        if (!storedValue) return [];
+
+        try {
+                const parsed = JSON.parse(storedValue);
+        return Array.isArray(parsed) ? parsed.filter(Boolean) : [];
+        } catch {
+            return [];
+        }
+    });
+
+    useEffect(()=> {
+        localStorage.setItem("watched", JSON.stringify(watched));
+    }, [watched]);
+
+    function handleDeleteWatched(id) {
+        setWatched((watched) => watched.filter(movie => movie.imdbID !== id));
+    }
+
     // Estado para la película seleccionada
     const [selectedId, setSelectedId] = useState(null);
 
@@ -65,7 +84,10 @@ export default function App() {
                     ) : (
                         <>
                             <WatchedSummary watched={watched} />
-                            <WatchedMoviesList watched={watched} />
+                            <WatchedMoviesList 
+                                watched={watched} 
+                                onDeleteWatched = {handleDeleteWatched}
+                            />
                         </>
                     )}
                  </WatchedMoviesContainer>
